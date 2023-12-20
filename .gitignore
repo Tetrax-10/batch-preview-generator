@@ -4,5 +4,6 @@ ffmpeg
 preview
 temp
 inno
+dev
 __pycache__
 *.txt

@@ -1,6 +1,8 @@
 # Batch Preview Generator
 
-Generates preview videos and GIFs from a video using FFmpeg CLI in batch.
+**Generates preview videos and GIFs from videos using FFmpeg CLI in batch.**
+
+<img src="https://raw.githubusercontent.com/Tetrax-10/batch-preview-generator/main/assets/banner.png"></img>
 
 ## Installation
 
@@ -12,11 +14,13 @@ If you dont have [FFmpeg](https://ffmpeg.org/) installed then download the FFmpe
 
 ##### [PSY - GANGNAM STYLE](https://www.youtube.com/watch?v=9bZkp7q19f0) music video to this 15 seconds preview 👇
 
-![demo preview](./assets/demo.gif)
+![demo preview](https://raw.githubusercontent.com/Tetrax-10/batch-preview-generator/main/assets/demo.gif)
+
+</br>
 
 Run `preview` in terminal without any arguments to initiate interactive prompts.
 
-![demo terminal](./assets/demo.png)
+<img src="https://raw.githubusercontent.com/Tetrax-10/batch-preview-generator/main/assets/demo.png" width="800px"></img>
 
 </br>
 
@@ -141,7 +145,7 @@ Let's say you set `--segments` to **3** and `--sduration` to **5**. In this scen
 
 The red parts are extracted for previews
 
-![segments](./assets/segments.png)
+![segments](https://raw.githubusercontent.com/Tetrax-10/batch-preview-generator/main/assets/segments.png)
 
 </br>
 
@@ -168,6 +172,8 @@ pyinstaller preview.spec
 ```
 
 Make sure to add your "dist" folder to the PATH so that when you run preview, it refers to your "dist" executable. Additionally, also ensure that the path of the installed "preview.exe" is removed during development.
+
+</br>
 
 ### Support
 
