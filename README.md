@@ -12,13 +12,13 @@ If you dont have [FFmpeg](https://ffmpeg.org/) installed then download the FFmpe
 
 ## Demo
 
-##### [PSY - GANGNAM STYLE](https://www.youtube.com/watch?v=9bZkp7q19f0) music video to this 15 seconds preview 👇
+**[PSY - GANGNAM STYLE](https://www.youtube.com/watch?v=9bZkp7q19f0) music video to this 15 seconds preview 👇**
 
 ![demo preview](https://raw.githubusercontent.com/Tetrax-10/batch-preview-generator/main/assets/demo.gif)
 
 </br>
 
-Run `preview` in terminal without any arguments to initiate interactive prompts.
+**Run `preview` in terminal without any arguments to initiate interactive prompts.**
 
 ![demo preview](https://raw.githubusercontent.com/Tetrax-10/batch-preview-generator/main/assets/demo.png)
 
@@ -28,7 +28,7 @@ Run `preview` in terminal without any arguments to initiate interactive prompts.
 
 You can use this as a CLI by just giving a valid argument(s).
 
-The above **Gangnam Style** gif can be create with this command.
+The above **Gangnam Style** gif can be created with this command.
 
 ```powershell
 Downloads> preview -o "D:\My Projects\batch-preview-generator\assets" -s 15 -sk 7 -g
