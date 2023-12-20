@@ -20,7 +20,7 @@ If you dont have [FFmpeg](https://ffmpeg.org/) installed then download the FFmpe
 
 Run `preview` in terminal without any arguments to initiate interactive prompts.
 
-<img src="https://raw.githubusercontent.com/Tetrax-10/batch-preview-generator/main/assets/demo.png" width="800px"></img>
+![demo preview](https://raw.githubusercontent.com/Tetrax-10/batch-preview-generator/main/assets/demo.png)
 
 </br>
 
@@ -30,8 +30,8 @@ You can use this as a CLI by just giving a valid argument(s).
 
 The above **Gangnam Style** gif can be create with this command.
 
-```sh
-preview -o "D:\My Projects\batch-preview-generator\assets" -s 15 -sk 7 -g
+```powershell
+Downloads> preview -o "D:\My Projects\batch-preview-generator\assets" -s 15 -sk 7 -g
 ```
 
 ##### args
@@ -127,7 +127,7 @@ preview -o "D:\My Projects\batch-preview-generator\assets" -s 15 -sk 7 -g
 
 If you want to run this as a CLI but without changing or providing default arguments just run
 
-```sh
+```powershell
 preview -cli
 ```
 
