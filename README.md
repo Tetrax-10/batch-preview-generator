@@ -135,11 +135,11 @@ preview -cli
 
 ## FAQ
 
-##### 1. What are segments `-s`, `--segments`?
+### 1. What are segments `-s`, `--segments`?
 
 Segments are small videos extracted from the input video with a duration specified by `--sduration`. For example, if you set `--segments` to **10** and `--sduration` to **2**, each segment will be **2** seconds long. Therefore, the total duration of the preview will be **20** seconds, as **10** segments each contribute **2** seconds.
 
-##### 2. From which part of the video are the segments extracted?
+### 2. From which part of the video are the segments extracted?
 
 Let's say you set `--segments` to **3** and `--sduration` to **5**. In this scenario, the input video is evenly split into **3** parts, and the first **5** seconds from each part are extracted for previews. Subsequently, these segments are concatenated and converted into a single video or gif. Thus the resulting preview will be of **5x3 = 15 seconds**.
 
