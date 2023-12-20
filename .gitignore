@@ -1,0 +1,8 @@
+build
+dist
+ffmpeg
+preview
+temp
+inno
+__pycache__
+*.txt

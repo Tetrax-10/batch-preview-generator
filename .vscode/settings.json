@@ -1,0 +1,7 @@
+{
+    "files.exclude": {
+        "**/build": true,
+        "**/ffmpeg": true,
+        "**/dist": true
+    }
+}
