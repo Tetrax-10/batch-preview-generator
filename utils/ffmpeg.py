@@ -1,4 +1,3 @@
-import sys
 import subprocess
 
 from termcolor import colored
@@ -17,6 +16,7 @@ def check(cmd):
         print(colored(f"{unavailable_tool} not found!", "red"), "\n")
         print(f"Please install {unavailable_tool} or install the Batch Preview Generator (FFmpeg included) version from")
         print(colored("https://github.com/Tetrax-10/batch-preview-generator/releases/latest", "blue"))
+        print()
 
         return False
 
@@ -42,22 +42,25 @@ def get_video_duration(file):
         return 0
 
 
-def generate_preview_chunck(file, start_duration, segments_duration, resolution, audio, gif, index, count):
-    audio_settings = "-an"
-    if audio and not gif:
-        audio_settings = "-c:a aac -b:a 128k"
+def generate_preview_chunck(file, start_duration, args, index, count):
+    audio_settings = "-c:a aac -b:a 128k" if (args.audio) else "-an"
 
-    ffmpeg_cmd = f"ffmpeg -v panic -y -xerror -ss {start_duration} -i \"{file}\" -t {segments_duration} -max_muxing_queue_size 1024 -c:v libx264 -vf scale=-1:{resolution} -pix_fmt yuv420p -profile:v high -level 4.2 -preset slow -crf 21 -threads 4 -strict -2 {audio_settings} \"temp/{index}-{count}.mp4\""
+    crf = "15" if (args.quality == "high") else ("30" if (args.quality == "low") else "22")
+
+    ffmpeg_cmd = f"ffmpeg -v panic -y -xerror -ss {start_duration} -i \"{file}\" -t {args.sduration} -max_muxing_queue_size 1024 -c:v libx264 -vf scale=-2:{args.resolution} -pix_fmt yuv420p -profile:v high -level 4.2 -preset {args.compression} -crf {crf} -threads 4 -strict -2 {audio_settings} \"temp/{index}-{count}.mp4\""
 
     run_cmd(ffmpeg_cmd)
 
 
-def generate_preview(temp_file_path, preview_file_path, resolution, gif):
+def generate_preview(temp_file_path, preview_file_path, args):
     ffmpeg_cmd = ""
 
-    if gif:
-        ffmpeg_cmd = f"ffmpeg -v panic -f concat -i \"{temp_file_path}\" -y -vf \"fps=10,scale=-1:{resolution}:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse\" -c:v gif -loop 0 \"{preview_file_path}.gif\""
+    if args.gif:
+        if args.quality == "high":
+            ffmpeg_cmd = f"ffmpeg -v panic -y -f concat -i \"{temp_file_path}\" -max_muxing_queue_size 1024 -threads 4 -vf \"fps={args.fps},scale=-2:{args.resolution}:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse\" -c:v gif -loop 0 -strict -2 \"{preview_file_path}.gif\""
+        else:
+            ffmpeg_cmd = f"ffmpeg -v panic -y -f concat -i \"{temp_file_path}\" -max_muxing_queue_size 1024 -threads 4 -vf \"fps={args.fps},scale=-2:{args.resolution}:flags=lanczos\" -c:v gif -loop 0 -strict -2  \"{preview_file_path}.gif\""
     else:
-        ffmpeg_cmd = f"ffmpeg -v panic -f concat -i \"{temp_file_path}\" -y -c:v copy -c:a copy \"{preview_file_path}.mp4\""
+        ffmpeg_cmd = f"ffmpeg -v panic -y -f concat -i \"{temp_file_path}\" -max_muxing_queue_size 1024 -threads 4 -c:v copy -c:a copy -strict -2 \"{preview_file_path}.mp4\""
 
     run_cmd(ffmpeg_cmd)

@@ -18,9 +18,10 @@ If you dont have [FFmpeg](https://ffmpeg.org/) installed then download the FFmpe
 
 </br>
 
-**Run `preview` in terminal without any arguments to initiate interactive prompts.**
+**Run `preview` in terminal without any arguments (flags) to initiate interactive prompts.**
 
 ![demo preview](https://raw.githubusercontent.com/Tetrax-10/batch-preview-generator/main/assets/demo.png)
+**Note:** Screenshot reflects initial release and new changes may not be represented.
 
 </br>
 
@@ -34,7 +35,7 @@ The above **Gangnam Style** gif can be created with this command.
 Downloads> preview -o "D:\My Projects\batch-preview-generator\assets" -s 15 -sk 7 -g
 ```
 
-##### args
+### Arguments
 
 <table>
   <tr align="center">
@@ -112,9 +113,29 @@ Downloads> preview -o "D:\My Projects\batch-preview-generator\assets" -s 15 -sk 
     <td>int</td>
   </tr>
   <tr align="center">
+    <td>-q</td>
+    <td>--quality</td>
+    <td align="left">Preview video quality (low, normal, high)</td>
+    <td>normal</td>
+    <td>string</td>
+  </tr>
+  <tr align="center">
+    <td>-c</td>
+    <td>--compression</td>
+    <td align="left">Preview video compression modes:<br><b>fast</b> but low quality output and bigger file size.<br><b>slow</b> gives good quality and reasonable size but little slower.<br><b>veryslow</b> gives best quality and least file size but its very slow.</td>
+    <td>slow</td>
+    <td>string</td>
+  </tr>
+  <tr align="center">
     <td>-cli</td>
     <td>--cli</td>
-    <td align="left">Run as a CLI without changing default arguments. If no arguments are provided, the program will act in prompt mode. To overcome that, you can use this flag</td>
+    <td align="left">Run as a CLI without changing default arguments. If no arguments are provided, the program will act in prompt mode. To prevent that, you can use this flag</td>
+    <th colspan="2">present or not</th>
+  </tr>
+  <tr align="center">
+    <td>-v</td>
+    <td>--version</td>
+    <td align="left">Prints version info</td>
     <th colspan="2">present or not</th>
   </tr>
   <tr align="center">
@@ -125,7 +146,7 @@ Downloads> preview -o "D:\My Projects\batch-preview-generator\assets" -s 15 -sk 
   </tr>
 </table>
 
-If you want to run this as a CLI but without changing or providing default arguments just run
+If you want to run this as a CLI without providing or changing default arguments then just run
 
 ```powershell
 preview -cli
@@ -162,7 +183,7 @@ pip install termcolor progress pyreadline3 pyinstaller
 ##### Run
 
 ```powershell
-python script.py <args>
+python preview.py <args>
 ```
 
 ##### Build executable
