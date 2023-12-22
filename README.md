@@ -6,9 +6,9 @@
 
 ## Installation
 
-Download and install the [latest version](https://github.com/Tetrax-10/batch-preview-generator/releases/latest) from the releases page. Done 🎉.
+Download and install the [Latest version](https://github.com/Tetrax-10/batch-preview-generator/releases/latest) from the releases page. Done 🎉.
 
-If you dont have [FFmpeg](https://ffmpeg.org/) installed then download the FFmpeg included version.
+If you dont have [FFmpeg](https://ffmpeg.org/) installed then download the [FFmpeg included version](https://github.com/Tetrax-10/batch-preview-generator/releases/latest).
 
 ## Demo
 
@@ -21,7 +21,7 @@ If you dont have [FFmpeg](https://ffmpeg.org/) installed then download the FFmpe
 **Run `preview` in terminal without any arguments (flags) to initiate interactive prompts.**
 
 ![demo preview](https://raw.githubusercontent.com/Tetrax-10/batch-preview-generator/main/assets/demo.png)
-**Note:** Screenshot reflects initial release and new changes may not be represented.
+**Note:** This Screenshot reflects initial release and new changes may not be represented.
 
 </br>
 
@@ -32,7 +32,7 @@ You can use this as a CLI by just giving a valid argument(s).
 The above **Gangnam Style** gif can be created with this command.
 
 ```powershell
-Downloads> preview -o "D:\My Projects\batch-preview-generator\assets" -s 15 -sk 7 -g
+PS Downloads> preview -o "D:\My Projects\batch-preview-generator\assets" -s 15 -sk 7 -g
 ```
 
 ### Arguments
@@ -69,7 +69,7 @@ Downloads> preview -o "D:\My Projects\batch-preview-generator\assets" -s 15 -sk 
   <tr align="center">
     <td>-s</td>
     <td>--segments</td>
-    <td align="left">No. of segments in a preview video (<a href="#FAQ">more info</a>)</td>
+    <td align="left">No. of <a href="#1-what-are-segments--s---segments">segments</a> in a preview video</td>
     <td>10 (check code)</td>
     <td>int</td>
   </tr>
@@ -148,7 +148,7 @@ Downloads> preview -o "D:\My Projects\batch-preview-generator\assets" -s 15 -sk 
 
 If you want to run this as a CLI without providing or changing default arguments then just run
 
-```powershell
+```sh
 preview -cli
 ```
 
@@ -174,7 +174,7 @@ The red parts are extracted for previews
 
 ##### Environment setup
 
-```powershell
+```sh
 git clone https://github.com/Tetrax-10/batch-preview-generator
 cd batch-preview-generator
 pip install termcolor progress pyreadline3 pyinstaller
@@ -182,13 +182,13 @@ pip install termcolor progress pyreadline3 pyinstaller
 
 ##### Run
 
-```powershell
+```sh
 python preview.py <args>
 ```
 
 ##### Build executable
 
-```powershell
+```sh
 pyinstaller preview.spec
 ```
 
@@ -201,6 +201,8 @@ The installer is compiled with the [Inno Setup Compiler](https://jrsoftware.org/
 ### Known bugs
 
 1. When this program is installed and uninstalled it leaves this string ";;" in PATH environmental variable, it's not an issue as it doesn't affect the env vars but its a bloat, So please help me fix this as I'm not good with Inno Setup Compiler
+
+</br>
 
 ### Support
 
