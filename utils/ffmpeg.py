@@ -13,10 +13,10 @@ def check(cmd):
         else:
             unavailable_tool = "FFprobe"
 
-        print(colored(f"{unavailable_tool} not found!", "red"), "\n")
+        print(colored(f"{unavailable_tool} not found!", "red"))
+        print()
         print(f"Please install {unavailable_tool} or install the Batch Preview Generator (FFmpeg included) version from")
         print(colored("https://github.com/Tetrax-10/batch-preview-generator/releases/latest", "blue"))
-        print()
 
         return False
 

@@ -110,10 +110,11 @@ def init():
 
             os.system('cls')
         except Exception as err:
+            print()
             if ("invalid literal for int()" in str(err)):
-                print(colored("\nInvalid input type, That field only accepts numbers", "red"))
+                print(colored("Invalid input type, That field only accepts numbers", "red"))
             else:
-                print(colored("\nInvalid input type", "red"))
+                print(colored("Invalid input type", "red"))
 
             exit_program()
 
@@ -148,7 +149,8 @@ def init():
 
 
 def log_args(args):
-    print(colored("Configuration:", "yellow", attrs=["bold", "underline"]) + "\n")
+    print(colored("Configuration:", "yellow", attrs=["bold", "underline"]))
+    print()
     print(colored(f"Input Path:", "blue"), colored(f"{args.path}", "yellow"))
     print(colored(f"Output path:", "blue"), colored(f"{args.out}", "yellow"))
     print(colored(f"Resolution:", "blue"), colored(f"{args.resolution}", "yellow"))
@@ -161,7 +163,8 @@ def log_args(args):
         print(colored(f"Gif:", "blue"), colored(f"{args.gif}", "yellow"))
     print(colored(f"FPS:", "blue"), colored(f"{args.fps}", "yellow"))
     print(colored(f"Quality:", "blue"), colored(f"{args.quality}", "yellow"))
-    print(colored(f"Compression mode:", "blue"), colored(f"{args.compression}", "yellow") + "\n")
+    print(colored(f"Compression mode:", "blue"), colored(f"{args.compression}", "yellow"))
+    print()
 
 
 def get_args():
