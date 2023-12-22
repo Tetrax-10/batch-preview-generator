@@ -3,7 +3,7 @@ dist
 ffmpeg
 previews
 temp
-inno
+Output
 dev
 __pycache__
 *.txt

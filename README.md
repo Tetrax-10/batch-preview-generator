@@ -194,7 +194,13 @@ pyinstaller preview.spec
 
 Make sure to add your "dist" folder to the PATH so that when you run preview, it refers to your "dist" executable. Additionally, also ensure that the path of the installed "preview.exe" is removed during development.
 
+The installer is compiled with the [Inno Setup Compiler](https://jrsoftware.org/isdl.php), and there's no need to perform this step during the development of Batch Preview Generator, as it is only used for distribution
+
 </br>
+
+### Known bugs
+
+1. When this program is installed and uninstalled it leaves this string ";;" in PATH environmental variable, it's not an issue as it doesn't affect the env vars but its a bloat, So please help me fix this as I'm not good with Inno Setup Compiler
 
 ### Support
 
