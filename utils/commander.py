@@ -169,6 +169,7 @@ def get_args():
 
 
 def exit_program():
+    print()
     if shared["args"]["cli"] != True:
-        input("\nPress enter to exit...")
+        input(colored("Press enter to exit...", "green"))
     sys.exit()

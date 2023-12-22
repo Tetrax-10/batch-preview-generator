@@ -57,7 +57,7 @@ def process_previews(args, video_files):
 
                 is_invalid_duration = True
     else:
-        print(colored("No videos found in the specified folder"))
+        print(colored("No videos found in the specified folder", "red"))
 
     if is_invalid_duration:
         print()
@@ -65,7 +65,6 @@ def process_previews(args, video_files):
         print(colored("    1.Unavailable duration: Can't fetch the video duration", "yellow"))
         print(colored("    2.Invalid duration (video duration:expected preview duration): Estimated preview video is equal or longer than the actual video", "yellow"))
 
-    print()
     glob.delete_folder(temp_folder_path)
 
 
@@ -78,3 +77,5 @@ if __name__ == "__main__":
         commander.exit_program()
     else:
         process_previews(args, video_files)
+
+    commander.exit_program()
