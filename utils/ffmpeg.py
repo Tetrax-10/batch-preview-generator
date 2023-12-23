@@ -47,7 +47,7 @@ def generate_preview_chunck(file, start_duration, args, index, count):
 
     crf = "15" if (args.quality == "high") else ("30" if (args.quality == "low") else "22")
 
-    ffmpeg_cmd = f"ffmpeg -v panic -y -xerror -ss {start_duration} -i \"{file}\" -t {args.sduration} -max_muxing_queue_size 1024 -c:v libx264 -vf scale=-2:{args.resolution} -pix_fmt yuv420p -profile:v high -level 4.2 -preset {args.compression} -crf {crf} -threads 4 -strict -2 {audio_settings} \"temp/{index}-{count}.mp4\""
+    ffmpeg_cmd = f"ffmpeg -v panic -y -xerror -ss {start_duration} -i \"{file}\" -t {args.sduration} -max_muxing_queue_size 1024 -c:v libx264 -vf scale=-2:{args.resolution} -pix_fmt yuv420p -profile:v high -level 4.2 -preset {args.compression} -crf {crf} -r {args.fps} -threads 4 -strict -2 {audio_settings} \"temp/{index}-{count}.mp4\""
 
     run_cmd(ffmpeg_cmd)
 
