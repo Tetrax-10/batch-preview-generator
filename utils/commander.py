@@ -28,7 +28,7 @@ def init():
     default_quality = "normal"
     default_compression = "slow"
 
-    parser = argparse.ArgumentParser(description=f"Generates preview videos and GIFs using FFmpeg CLI in batch. Visit {colored("https://github.com/Tetrax-10/batch-preview-generator?tab=readme-ov-file#arguments", "blue")} to view detailed docs")
+    parser = argparse.ArgumentParser(description=f"Generates preview videos and GIFs using FFmpeg CLI in batch. Visit {colored("https://github.com/Tetrax-10/batch-preview-generator#arguments", "blue")} to view detailed docs")
     parser.add_argument("-p", "--path", help="Path of the video or folder for batch processing", type=str, metavar="")
     parser.add_argument("-o", "--out", help="Output folder for generated previews", type=str, metavar="")
     parser.add_argument("-r", "--resolution", help="Preview video resolution", type=int, metavar="")
