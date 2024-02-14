@@ -18,6 +18,10 @@ def get_dirname(path):
     return os.path.dirname(path)
 
 
+def is_abs(path):
+    return os.path.isabs(path)
+
+
 def get_abs_path(path):
     if path == ".":
         return get_cwd()
@@ -25,7 +29,7 @@ def get_abs_path(path):
     path = os.path.normpath(path)
     path = path[1:] if path.startswith("\\") else path
 
-    if not os.path.isabs(path):
+    if not is_abs(path):
         path = join_path(get_cwd(), path)
 
     return path
@@ -61,7 +65,19 @@ def get_file_name(file, type="name"):
 
 def get_all_video_files(path):
     video_files = []
-    video_extensions = ["mp4", "mkv", "avi", "mov", "m4a", "m4v", "mpg", "mpeg", "wmv", "webm", "flv"]
+    video_extensions = [
+        "mp4",
+        "mkv",
+        "avi",
+        "mov",
+        "m4a",
+        "m4v",
+        "mpg",
+        "mpeg",
+        "wmv",
+        "webm",
+        "flv",
+    ]
 
     if os.path.isfile(path):
         video_files.append(Path(path))

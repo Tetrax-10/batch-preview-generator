@@ -7,18 +7,19 @@ import utils.commander as commander
 import utils.ffmpeg as ffmpeg
 import utils.glob as glob
 import utils.utils as utils
-
+import tempfile
 
 def process_previews(args, video_files):
-    temp_folder_path = glob.join_path(glob.get_cwd(), "temp")
+    temp_folder_path = glob.join_path(tempfile.gettempdir(), "preview-temp")
     glob.delete_folder(temp_folder_path)
     glob.create_folder(temp_folder_path)
 
-    glob.create_folder(args.out)
+    if not args.samepath:
+        glob.create_folder(args.out)
 
     is_invalid_duration = False
 
-    if (len(video_files)):
+    if len(video_files):
         for index, video_file in enumerate(video_files):
             file_name = glob.get_file_name(video_file)
             file_extension = glob.get_file_name(video_file, "ext")
@@ -37,7 +38,7 @@ def process_previews(args, video_files):
                     if count == 0:
                         video_segment_prog.update()  # prints the progress bar even before finishing this loop event
                     start_time = args.skip if count == 0 else round(count*ratio, 3)
-                    ffmpeg.generate_preview_chunck(video_file, start_time, args, index, count)
+                    ffmpeg.generate_preview_chunck(video_file, start_time, args, index, count, temp_folder_path)
                     temp_file_contents += f"file '{index}-{count}.mp4'\n"
                     video_segment_prog.next()
                     count += 1
@@ -46,7 +47,14 @@ def process_previews(args, video_files):
                 with open(temp_file_path, "w") as file:
                     file.write(temp_file_contents)
 
-                ffmpeg.generate_preview(temp_file_path, f"{glob.join_path(args.out, f"{file_name} preview")}", args)
+                if(args.samepath):
+                    out = glob.join_path(glob.get_dirname(video_file), args.out)
+                else:
+                    out = args.out
+
+                glob.create_folder(out)
+                ffmpeg.generate_preview(temp_file_path, f"{glob.join_path(out, f"{file_name} preview")}", args)
+
                 video_segment_prog.next()
                 video_segment_prog.finish()
             else:

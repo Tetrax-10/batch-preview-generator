@@ -2,7 +2,6 @@ build
 dist
 ffmpeg
 previews
-temp
 Output
 dev
 __pycache__

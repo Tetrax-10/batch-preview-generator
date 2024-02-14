@@ -120,7 +120,7 @@ def init():
 
     else:
         args.path = glob.get_abs_path(glob.correct_path(args.path)) if args.path != None and args.path != "" else default_path
-        args.out = glob.get_abs_path(glob.correct_path(args.out)) if args.out != None and args.out != "" else default_out
+        args.out = glob.correct_path(args.out) if args.out != None and args.out != "" else default_out
         args.resolution = args.resolution if args.resolution != None else default_resolution
         args.segments = args.segments if args.segments != None else default_segments
         args.sduration = args.sduration if args.sduration != None else default_sduration
@@ -136,7 +136,16 @@ def init():
     args.version = version
 
     if (args.samepath):
-        args.out = glob.get_dirname(args.path)
+        if(default_out != args.out):
+            if(glob.is_abs(args.out)):
+                print(colored("Outpath should be a relative path when using --samepath", "red"))
+                sys.exit()
+        else:
+            args.out = "."
+
+        print(args.path, args.out)
+    else:
+        args.out = glob.get_abs_path(args.out)
 
     if (args.gif):
         args.audio = False
