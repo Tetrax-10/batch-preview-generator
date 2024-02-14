@@ -136,7 +136,7 @@ def init():
     args.version = version
 
     if (args.samepath):
-        args.out = args.path
+        args.out = glob.get_dirname(args.path)
 
     if (args.gif):
         args.audio = False

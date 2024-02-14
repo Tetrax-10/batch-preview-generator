@@ -14,6 +14,10 @@ def join_path(*args):
     return os.path.join(*args)
 
 
+def get_dirname(path):
+    return os.path.dirname(path)
+
+
 def get_abs_path(path):
     if path == ".":
         return get_cwd()
