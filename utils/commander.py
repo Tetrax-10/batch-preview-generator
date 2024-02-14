@@ -139,7 +139,7 @@ def init():
         if(default_out != args.out):
             if(glob.is_abs(args.out)):
                 print(colored("Outpath should be a relative path when using --samepath", "red"))
-                sys.exit()
+                exit_program()
         else:
             args.out = "."
 
