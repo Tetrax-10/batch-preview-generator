@@ -113,8 +113,8 @@ def init():
             input_compression = input(colored(f"Compression mode (fast/slow/veryslow) ({colored(default_compression, "yellow")}{f"{colored("): ", "blue")}"}", "blue")).strip()
             args.compression = input_compression.lower() if input_compression != "" else default_compression
 
-            input_cuda = input(colored(f"Use cuda cores (Nvidia GPUs only) ({colored("false", "yellow")}{f"{colored("): ", "blue")}"}", "blue")).strip()
-            args.cuda = True if input_cuda == "true" else False
+            input_hwacc = input(colored(f"Hardware acceleration (false/cuda) ({colored("false", "yellow")}{f"{colored("): ", "blue")}"}", "blue")).strip()
+            args.cuda = True if input_hwacc == "cuda" else False
 
             os.system('cls')
         except Exception as err:
