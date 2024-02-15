@@ -90,7 +90,7 @@ PS Downloads> preview -o "D:\My Projects\batch-preview-generator\assets" -s 15 -
   <tr align="center">
     <td>-sp</td>
     <td>--samepath</td>
-    <td align="left">When passing this argument, the output folder is set to the input folder</td>
+    <td align="left">When passing this argument, the output folder is set to the input folder. when using this the --out path should be relative</td>
     <th colspan="2">present or not</th>
   </tr>
   <tr align="center">
