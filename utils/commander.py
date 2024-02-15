@@ -13,7 +13,7 @@ shared = {"args": None}
 
 
 def init():
-    version = "1.1"
+    version = "1.2"
 
     default_path = glob.get_cwd()
     default_out = glob.join_path(glob.get_cwd(), "previews")
