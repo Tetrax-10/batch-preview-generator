@@ -53,7 +53,7 @@ def init():
     shared["args"] = vars(args)
 
     if args.version == True:
-        print(f"Version {version}")
+        print(version)
         sys.exit()
 
     if not ffmpeg.check("ffmpeg -version") or not ffmpeg.check("ffprobe -version"):
