@@ -85,7 +85,7 @@ PS Downloads> preview -o "D:\My Projects\batch-preview-generator\assets" -s 15 -
     <td>--skip</td>
     <td align="left">Skips the first n seconds of a video, mainly used to skip intros and filler. For movies, set this value higher according to the intro duration</td>
     <td>20</td>
-    <td>int</td>
+    <td>float</td>
   </tr>
   <tr align="center">
     <td>-sp</td>

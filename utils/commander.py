@@ -20,7 +20,7 @@ def init():
     default_resolution = 360
     default_segments = 10
     default_sduration = 1.0
-    default_skip_first_n_sec = 20
+    default_skip_first_n_sec = 20.0
     default_audio = False
     default_gif = False
     default_gif_fps = 15
@@ -34,7 +34,7 @@ def init():
     parser.add_argument("-r", "--resolution", help="Preview video resolution", type=int, metavar="")
     parser.add_argument("-s", "--segments", help="No. of segments in a preview video", type=int, metavar="")
     parser.add_argument("-sd", "--sduration", help="Duration of a segment", type=float, metavar="")
-    parser.add_argument("-sk", "--skip", help="Skip first n seconds", type=int, metavar="")
+    parser.add_argument("-sk", "--skip", help="Skip first n seconds", type=str, metavar="")
     parser.add_argument("-sp", "--samepath", help="The output will be generated in the input path folder", action="store_true")
     parser.add_argument("-a", "--audio", help="Previews will be generated with audio", action="store_true")
     parser.add_argument("-g", "--gif", help="Previews will be generated in the GIF format (takes more time & space)", action="store_true")
@@ -92,7 +92,7 @@ def init():
             args.sduration = float(input_sduration) if input_sduration != "" else default_sduration
 
             input_skip = input(colored(f"Skip first n seconds ({colored(default_skip_first_n_sec, "yellow")}{f"{colored("): ", "blue")}"}", "blue"))
-            args.skip = int(input_skip) if input_skip != "" else default_skip_first_n_sec
+            args.skip = float(input_skip) if input_skip != "" else default_skip_first_n_sec
 
             input_audio = input(colored(f"Audio ({colored("false", "yellow")}{f"{colored("): ", "blue")}"}", "blue")).strip()
             args.audio = True if input_audio == "true" else False
@@ -129,7 +129,7 @@ def init():
         args.resolution = args.resolution if args.resolution != None else default_resolution
         args.segments = args.segments if args.segments != None else default_segments
         args.sduration = args.sduration if args.sduration != None else default_sduration
-        args.skip = args.skip if args.skip != None else default_skip_first_n_sec
+        args.skip = float(args.skip) if args.skip != None else default_skip_first_n_sec
         args.audio = args.audio if args.audio != None else default_audio
         args.gif = args.gif if args.gif != None else default_gif
         args.fps = args.fps if args.fps != None else default_gif_fps if args.gif else default_fps
