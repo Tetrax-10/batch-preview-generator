@@ -76,7 +76,10 @@ def init():
             input_path = input(colored(f"Path of the video or folder ({colored(default_path, "yellow")}{f"{colored("): ", "blue")}"}", "blue")).strip()
             args.path = glob.get_abs_path(glob.correct_path(input_path)) if input_path != "" else default_path
 
-            default_out = glob.join_path(args.path, "previews")
+            if glob.is_file(args.path):
+                default_out = glob.join_path(glob.get_dirname(args.path), "previews")
+            else:
+                default_out = glob.join_path(args.path, "previews")
             input_out = input(colored(f"Output folder ({colored(default_out, "yellow")}{f"{colored("): ", "blue")}"}", "blue")).strip()
             args.out = glob.get_abs_path(glob.correct_path(input_out)) if input_out != "" else default_out
 

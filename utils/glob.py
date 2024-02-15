@@ -18,6 +18,11 @@ def get_dirname(path):
     return os.path.dirname(path)
 
 
+def is_file(path):
+    p = Path(path)
+    return p.is_file()
+
+
 def is_abs(path):
     return os.path.isabs(path)
 
