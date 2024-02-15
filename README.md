@@ -8,7 +8,7 @@
 
 Download and install the [Latest version](https://github.com/Tetrax-10/batch-preview-generator/releases/latest) from the releases page. Done 🎉.
 
-If you dont have [FFmpeg](https://ffmpeg.org/) installed then download the [FFmpeg included version](https://github.com/Tetrax-10/batch-preview-generator/releases/latest).
+If you dont have [FFmpeg](https://ffmpeg.org/) installed then download the [FFmpeg included version](https://github.com/Tetrax-10/batch-preview-generator/releases/latest) or download FFmpeg from [here](https://www.gyan.dev/ffmpeg/builds/ffmpeg-git-essentials.7z).
 
 ## Demo
 
