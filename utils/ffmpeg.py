@@ -60,38 +60,54 @@ def get_video_bitrate(file):
     output = run_cmd(ffprobe_cmd).stdout.strip()
 
     if output.isnumeric():
-        return output
+        return int(output)
     else:
-        return "3500000"
+        return 3500000
 
 
-def generate_preview_chunck(file, start_duration, bitrate, args, temp_path, out_file_name):
-    audio_settings = "-c:a aac -b:a 128k" if (args.audio) else "-an"
+def get_audio_bitrate(file):
+    ffprobe_cmd = f'ffprobe -v panic -select_streams a:0 -show_entries stream=bit_rate -of default=noprint_wrappers=1:nokey=1 "{file}"'
 
+    output = run_cmd(ffprobe_cmd).stdout.strip()
+
+    if output.isnumeric():
+        return int(output)
+    else:
+        return 128000
+
+
+def generate_preview_chunck(file, start_duration, v_bitrate, a_bitrate, args, temp_path, out_file_name):
+    audio = "-an"
+    video = ""
     crf = "22"
-    if args.quality == "high":
-        crf = "15"
-        bitrate = int(bitrate) * 2.5
-    elif args.quality == "low":
-        crf = "30"
-    else:
-        bitrate = int(bitrate) + 500000
-
     hw_acc_pre_input = ""
     encoder = "libx264"
     scale = "scale"
     pix_fmt = " -pix_fmt yuv420p"
     preset = args.compression
 
+    if args.quality == "high":
+        crf = "15"
+        v_bitrate = v_bitrate * 2.5
+    elif args.quality == "low":
+        crf = "30"
+        if a_bitrate > 128000:
+            a_bitrate = 128000
+    else:
+        # normal
+        if a_bitrate > 256000:
+            a_bitrate = 256000
+        v_bitrate = v_bitrate + 500000
+
+    if args.audio:
+        audio = f"-c:a aac -b:a {a_bitrate}"
+
     if args.cuda:
         hw_acc_pre_input = " -hwaccel cuda -hwaccel_output_format cuda"
         encoder = "h264_nvenc"
         scale = "scale_cuda"
         pix_fmt = ""
-
-        bitrate = f" -b:v {bitrate}"
-        if args.quality == "low":
-            bitrate = ""
+        video = f" -b:v {v_bitrate}"
 
         if preset == "veryslow":
             preset = "p7"
@@ -99,10 +115,8 @@ def generate_preview_chunck(file, start_duration, bitrate, args, temp_path, out_
             preset = "p5"
         elif preset == "fast":
             preset = "p3"
-    else:
-        bitrate = ""
 
-    ffmpeg_cmd = f'ffmpeg -v panic -y -xerror{hw_acc_pre_input} -ss {start_duration} -i "{file}" -t {args.sduration} -max_muxing_queue_size 1024 -c:v {encoder} -vf {scale}=-1:{args.resolution}{pix_fmt}{bitrate} -profile:v high -level 4.2 -preset {preset} -crf {crf} -r {args.fps} -strict -2 {audio_settings} "{temp_path}/{out_file_name}.mp4"'
+    ffmpeg_cmd = f'ffmpeg -v panic -y -xerror{hw_acc_pre_input} -ss {start_duration} -i "{file}" -t {args.sduration} -max_muxing_queue_size 1024 -c:v {encoder} -vf {scale}=-1:{args.resolution}{pix_fmt}{video} -profile:v high -level 4.2 -preset {preset} -crf {crf} -r {args.fps} -strict -2 {audio} "{temp_path}/{out_file_name}.mp4"'
 
     run_cmd(ffmpeg_cmd)
 
