@@ -34,11 +34,12 @@ def process_previews(args, video_files):
                 video_segment_prog = IncrementalBar(utils.wrap_text(relative_path), max=round(args.segments) + 1, suffix='%(percent)d%%')
 
                 count = 0
+                bitrate = ffmpeg.get_video_bitrate(video_file)
                 while count < round(args.segments):
                     if count == 0:
                         video_segment_prog.update()  # prints the progress bar even before finishing this loop event
                     start_time = args.skip if count == 0 else round(count*ratio, 3)
-                    ffmpeg.generate_preview_chunck(video_file, start_time, args, index, count, temp_folder_path)
+                    ffmpeg.generate_preview_chunck(video_file, start_time, bitrate, args, temp_folder_path, f"{index}-{count}")
                     temp_file_contents += f"file '{index}-{count}.mp4'\n"
                     video_segment_prog.next()
                     count += 1

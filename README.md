@@ -133,6 +133,12 @@ PS Downloads> preview -o "D:\My Projects\batch-preview-generator\assets" -s 15 -
     <th colspan="2">present or not</th>
   </tr>
   <tr align="center">
+    <td>-cuda</td>
+    <td>--cuda</td>
+    <td align="left">Uses cuda cores for fast processing (Nvidia GPUs only)</td>
+    <th colspan="2">present or not</th>
+  </tr>
+  <tr align="center">
     <td>-v</td>
     <td>--version</td>
     <td align="left">Prints version info</td>

@@ -42,6 +42,7 @@ def init():
     parser.add_argument("-q", "--quality", help="Preview quality (low/normal/high)", type=str, metavar="")
     parser.add_argument("-c", "--compression", help="Preview compression mode (fast/slow/veryslow)", type=str, metavar="")
     parser.add_argument("-cli", "--cli", help="Run as a CLI without changing default args", action="store_true")
+    parser.add_argument("-cuda", "--cuda", help="Hardware acceleration: Uses Nvidia's cuda cores", action="store_true")
     parser.add_argument("-v", "--version", help="Prints version info", action="store_true")
 
     args = parser.parse_args()
@@ -109,6 +110,9 @@ def init():
             input_compression = input(colored(f"Compression mode (fast/slow/veryslow) ({colored(default_compression, "yellow")}{f"{colored("): ", "blue")}"}", "blue")).strip()
             args.compression = input_compression.lower() if input_compression != "" else default_compression
 
+            input_cuda = input(colored(f"Use cuda cores (Nvidia GPUs only) ({colored("false", "yellow")}{f"{colored("): ", "blue")}"}", "blue")).strip()
+            args.cuda = True if input_cuda == "true" else False
+
             os.system('cls')
         except Exception as err:
             print()
@@ -174,6 +178,7 @@ def log_args(args):
     print(colored(f"FPS:", "blue"), colored(f"{args.fps}", "yellow"))
     print(colored(f"Quality:", "blue"), colored(f"{args.quality}", "yellow"))
     print(colored(f"Compression mode:", "blue"), colored(f"{args.compression}", "yellow"))
+    print(colored(f"Hardware acceleration:", "blue"), colored(f"{"cuda" if args.cuda else False}", "yellow"))
     print()
 
 

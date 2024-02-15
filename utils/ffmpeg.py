@@ -54,12 +54,55 @@ def get_video_duration(file):
         return 0
 
 
-def generate_preview_chunck(file, start_duration, args, index, count, temp_path):
+def get_video_bitrate(file):
+    ffprobe_cmd = f'ffprobe -v panic -select_streams v:0 -show_entries stream=bit_rate -of default=noprint_wrappers=1:nokey=1 "{file}"'
+
+    output = run_cmd(ffprobe_cmd).stdout.strip()
+
+    if output.isnumeric():
+        return output
+    else:
+        return "3500000"
+
+
+def generate_preview_chunck(file, start_duration, bitrate, args, temp_path, out_file_name):
     audio_settings = "-c:a aac -b:a 128k" if (args.audio) else "-an"
 
-    crf = "15" if (args.quality == "high") else ("30" if (args.quality == "low") else "22")
+    crf = "22"
+    if args.quality == "high":
+        crf = "15"
+        bitrate = int(bitrate) * 2.5
+    elif args.quality == "low":
+        crf = "30"
+    else:
+        bitrate = int(bitrate) + 500000
 
-    ffmpeg_cmd = f'ffmpeg -v panic -y -xerror -ss {start_duration} -i "{file}" -t {args.sduration} -max_muxing_queue_size 1024 -c:v libx264 -vf scale=-2:{args.resolution} -pix_fmt yuv420p -profile:v high -level 4.2 -preset {args.compression} -crf {crf} -r {args.fps} -threads 4 -strict -2 {audio_settings} "{temp_path}/{index}-{count}.mp4"'
+    hw_acc_pre_input = ""
+    encoder = "libx264"
+    scale = "scale"
+    pix_fmt = " -pix_fmt yuv420p"
+    preset = args.compression
+
+    if args.cuda:
+        hw_acc_pre_input = " -hwaccel cuda -hwaccel_output_format cuda"
+        encoder = "h264_nvenc"
+        scale = "scale_cuda"
+        pix_fmt = ""
+
+        bitrate = f" -b:v {bitrate}"
+        if args.quality == "low":
+            bitrate = ""
+
+        if preset == "veryslow":
+            preset = "p7"
+        elif preset == "slow":
+            preset = "p5"
+        elif preset == "fast":
+            preset = "p3"
+    else:
+        bitrate = ""
+
+    ffmpeg_cmd = f'ffmpeg -v panic -y -xerror{hw_acc_pre_input} -ss {start_duration} -i "{file}" -t {args.sduration} -max_muxing_queue_size 1024 -c:v {encoder} -vf {scale}=-1:{args.resolution}{pix_fmt}{bitrate} -profile:v high -level 4.2 -preset {preset} -crf {crf} -r {args.fps} -strict -2 {audio_settings} "{temp_path}/{out_file_name}.mp4"'
 
     run_cmd(ffmpeg_cmd)
 
