@@ -213,7 +213,8 @@ The installer is compiled with the [Inno Setup Compiler](https://jrsoftware.org/
 ### Assist required
 
 1. Help me implement H/W acceleration for Radeon graphics as I don't have an AMD gpu.
-2. Help me fix the `known bugs`.
+2. Help me to build/test executable for `linux` and `mac os`.
+3. Help me fix the `known bugs`.
 
 </br>
 
