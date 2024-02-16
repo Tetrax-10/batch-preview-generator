@@ -83,7 +83,6 @@ def generate_preview_chunck(file, start_duration, v_bitrate, a_bitrate, args, te
     hw_acc_pre_input = ""
     encoder = "libx264"
     scale = "scale"
-    pix_fmt = " -pix_fmt yuv420p"
     preset = args.compression
 
     if args.quality == "high":
@@ -106,7 +105,6 @@ def generate_preview_chunck(file, start_duration, v_bitrate, a_bitrate, args, te
         hw_acc_pre_input = " -hwaccel cuda -hwaccel_output_format cuda"
         encoder = "h264_nvenc"
         scale = "scale_cuda"
-        pix_fmt = ""
         video = f" -b:v {v_bitrate}"
 
         if preset == "veryslow":
@@ -116,7 +114,7 @@ def generate_preview_chunck(file, start_duration, v_bitrate, a_bitrate, args, te
         elif preset == "fast":
             preset = "p3"
 
-    ffmpeg_cmd = f'ffmpeg -v panic -y -xerror{hw_acc_pre_input} -ss {start_duration} -i "{file}" -t {args.sduration} -max_muxing_queue_size 1024 -c:v {encoder} -vf {scale}=-1:{args.resolution}{pix_fmt}{video} -profile:v high -level 4.2 -preset {preset} -crf {crf} -r {args.fps} -strict -2 {audio} "{temp_path}/{out_file_name}.mp4"'
+    ffmpeg_cmd = f'ffmpeg -v panic -y -xerror{hw_acc_pre_input} -ss {start_duration} -i "{file}" -t {args.sduration} -max_muxing_queue_size 1024 -c:v {encoder} -vf {scale}=-1:{args.resolution}{video} -profile:v high -level 4.2 -preset {preset} -crf {crf} -r {args.fps} -strict -2 {audio} "{temp_path}/{out_file_name}.mp4"'
 
     run_cmd(ffmpeg_cmd)
 
