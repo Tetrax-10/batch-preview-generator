@@ -181,7 +181,7 @@ The red parts are extracted for previews
 ##### Environment setup
 
 ```sh
-git clone https://github.com/Tetrax-10/batch-preview-generator
+git clone https://github.com/Tetrax-10/batch-preview-generator.git
 cd batch-preview-generator
 pip install termcolor progress pyreadline3 pyinstaller
 ```
@@ -208,10 +208,12 @@ The installer is compiled with the [Inno Setup Compiler](https://jrsoftware.org/
 
 1. When this program is installed and uninstalled it leaves this string ";;" in PATH environmental variable, it's not an issue as it doesn't affect the env vars but its a bloat, So please help me fix this as I'm not good with Inno Setup Compiler
 
+</br>
+
 ### Assist required
 
-1. I don't have an AMD gpu to implement H/W acceleration
-2. Help me fix the `known bugs`
+1. Help me implement H/W acceleration for Radeon graphics as I don't have an AMD gpu.
+2. Help me fix the `known bugs`.
 
 </br>
 
