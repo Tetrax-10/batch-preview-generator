@@ -87,7 +87,7 @@ def generate_preview_chunck(file, start_duration, v_bitrate, a_bitrate, args, te
 
     if args.quality == "high":
         crf = "15"
-        v_bitrate = v_bitrate * 2.5
+        v_bitrate = v_bitrate * 2
     elif args.quality == "low":
         crf = "30"
         if a_bitrate > 128000:
