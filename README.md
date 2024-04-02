@@ -32,7 +32,7 @@ You can use this as a CLI by just giving a valid argument(s).
 The above **Gangnam Style** gif can be created with this command.
 
 ```powershell
-PS Downloads> preview -p "Gangnam Style.mp4" -s 15 -sk 7.0 -sp -g
+preview -p "Gangnam Style.mp4" -s 15 -sk 7.0 -sp -g
 ```
 
 ### Arguments
