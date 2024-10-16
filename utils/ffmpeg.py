@@ -114,7 +114,7 @@ def generate_preview_chunck(file, start_duration, v_bitrate, a_bitrate, args, te
         elif preset == "fast":
             preset = "p3"
 
-    ffmpeg_cmd = f'ffmpeg -v panic -y -xerror{hw_acc_pre_input} -ss {start_duration} -i "{file}" -t {args.sduration} -max_muxing_queue_size 1024 -c:v {encoder} -vf {scale}=-1:{args.resolution}{video} -profile:v high -level 4.2 -preset {preset} -crf {crf} -r {args.fps} -strict -2 {audio} "{temp_path}/{out_file_name}.mp4"'
+    ffmpeg_cmd = f'ffmpeg -v panic -y -xerror{hw_acc_pre_input} -ss {start_duration} -i "{file}" -t {args.sduration} -max_muxing_queue_size 1024 -c:v {encoder} -vf {scale}=-2:{args.resolution}{video} -profile:v high -level 4.2 -preset {preset} -crf {crf} -r {args.fps} -strict -2 {audio} "{temp_path}/{out_file_name}.mp4"'
 
     run_cmd(ffmpeg_cmd)
 
@@ -126,7 +126,7 @@ def generate_preview(temp_file_path, preview_file_path, args):
         if args.quality == "high":
             ffmpeg_cmd = f'ffmpeg -v panic -y -f concat -i "{temp_file_path}" -max_muxing_queue_size 1024 -threads 4 -vf "fps={args.fps},scale=-2:{args.resolution}:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" -c:v gif -loop 0 -strict -2 "{preview_file_path}.gif"'
         else:
-            ffmpeg_cmd = f'ffmpeg -v panic -y -f concat -i "{temp_file_path}" -max_muxing_queue_size 1024 -threads 4 -vf "fps={args.fps},scale=-2:{args.resolution}:flags=lanczos" -c:v gif -loop 0 -strict -2  "{preview_file_path}.gif"'
+            ffmpeg_cmd = f'ffmpeg -v panic -y -f concat -i "{temp_file_path}" -max_muxing_queue_size 1024 -threads 4 -vf "fps={args.fps},scale=-2:{args.resolution}:flags=lanczos" -c:v gif -loop 0 -strict -2 "{preview_file_path}.gif"'
     else:
         ffmpeg_cmd = f'ffmpeg -v panic -y -f concat -i "{temp_file_path}" -max_muxing_queue_size 1024 -threads 4 -c:v copy -c:a copy -strict -2 "{preview_file_path}.mp4"'
 

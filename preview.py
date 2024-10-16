@@ -9,6 +9,7 @@ import utils.glob as glob
 import utils.utils as utils
 import tempfile
 
+
 def process_previews(args, video_files):
     temp_folder_path = glob.join_path(tempfile.gettempdir(), "preview-temp")
     glob.delete_folder(temp_folder_path)
@@ -27,11 +28,11 @@ def process_previews(args, video_files):
             video_duration = ffmpeg.get_video_duration(video_file)
 
             expected_preview_duration = round(args.segments * args.sduration)
-            if (expected_preview_duration < round(video_duration)):
-                ratio = round(video_duration/args.segments, 3)
+            if expected_preview_duration < round(video_duration):
+                ratio = round(video_duration / args.segments, 3)
                 temp_file_contents = ""
 
-                video_segment_prog = IncrementalBar(utils.wrap_text(relative_path), max=round(args.segments) + 1, suffix='%(percent)d%%')
+                video_segment_prog = IncrementalBar(utils.wrap_text(relative_path), max=round(args.segments) + 1, suffix="%(percent)d%%")
 
                 count = 0
                 v_bitrate = ffmpeg.get_video_bitrate(video_file)
@@ -39,7 +40,7 @@ def process_previews(args, video_files):
                 while count < round(args.segments):
                     if count == 0:
                         video_segment_prog.update()  # prints the progress bar even before finishing this loop event
-                    start_time = args.skip if count == 0 else round(count*ratio, 3)
+                    start_time = args.skip if count == 0 else round(count * ratio, 3)
                     ffmpeg.generate_preview_chunck(video_file, start_time, v_bitrate, a_bitrate, args, temp_folder_path, f"{index}-{count}")
                     temp_file_contents += f"file '{index}-{count}.mp4'\n"
                     video_segment_prog.next()
@@ -49,21 +50,21 @@ def process_previews(args, video_files):
                 with open(temp_file_path, "w") as file:
                     file.write(temp_file_contents)
 
-                if(args.samepath):
+                if args.samepath:
                     out = glob.join_path(glob.get_dirname(video_file), args.out)
                 else:
                     out = args.out
 
                 glob.create_folder(out)
-                ffmpeg.generate_preview(temp_file_path, f"{glob.join_path(out, f"{file_name} preview")}", args)
+                ffmpeg.generate_preview(temp_file_path, glob.join_path(out, f"{file_name} preview"), args)
 
                 video_segment_prog.next()
                 video_segment_prog.finish()
             else:
                 if video_duration > 0:
-                    print(colored(f"skiped [Invalid duration ({round(video_duration)}:{expected_preview_duration})]: ", "yellow"), relative_path)
+                    print(colored(f"skipped [Invalid duration ({round(video_duration)}:{expected_preview_duration})]: ", "yellow"), relative_path)
                 else:
-                    print(colored(f"skiped [Unavailable duration]", "yellow"), relative_path)
+                    print(colored("skipped [Unavailable duration]", "yellow"), relative_path)
 
                 is_invalid_duration = True
     else:
@@ -72,8 +73,8 @@ def process_previews(args, video_files):
     if is_invalid_duration:
         print()
         print(colored("Warning codes:", "yellow"))
-        print(colored("    1.Unavailable duration: Can't fetch the video duration", "yellow"))
-        print(colored("    2.Invalid duration (video duration:expected preview duration): Estimated preview video is equal or longer than the actual video", "yellow"))
+        print(colored("    1. Unavailable duration: Can't fetch the video duration", "yellow"))
+        print(colored("    2. Invalid duration (video duration:expected preview duration): Estimated preview video is equal or longer than the actual video", "yellow"))
 
     glob.delete_folder(temp_folder_path)
 
