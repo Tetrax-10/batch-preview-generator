@@ -1,7 +1,7 @@
 #include "environment.iss"
 
 #define MyAppName "Batch Preview Generator"
-#define MyAppVersion "1.2"
+#define MyAppVersion "1.3"
 #define MyAppPublisher "Tetrax-10"
 #define MyURL "https://github.com/Tetrax-10"
 #define MyAppURL "https://github.com/Tetrax-10/batch-preview-generator"
