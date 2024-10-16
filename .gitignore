@@ -5,5 +5,14 @@ previews
 Output
 dev
 __pycache__
-*.txt
 *.mp4
+*.mkv
+*.avi
+*.mov
+*.m4a
+*.m4v
+*.mpg
+*.mpeg
+*.wmv
+*.webm
+*.flv

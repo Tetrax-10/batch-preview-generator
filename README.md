@@ -183,7 +183,7 @@ The red parts are extracted for previews
 ```sh
 git clone https://github.com/Tetrax-10/batch-preview-generator.git
 cd batch-preview-generator
-pip install termcolor progress pyreadline3 pyinstaller
+pip install -r requirements.txt
 ```
 
 ##### Run
