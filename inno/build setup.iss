@@ -24,6 +24,7 @@ Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
 ChangesEnvironment=true
+AllowCancelDuringInstall=true
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
